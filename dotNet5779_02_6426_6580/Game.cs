@@ -8,15 +8,14 @@ namespace dotNet5779_02_6426_6580
 {
     public class Game
     {
-        public Player[] players = new Player[2];
-        public CardStock deck;
+        private Player[] players = new Player[2];
+        private CardStock deck;
  
 
         public override string ToString()
         {
-            return string.Format(@"Player 1: {0}, amount of cards: {2}.
-                                   Player 2: {1}, amount of cards: {3}.\n", players[0].name,
-                                   players[1].name, players[0].queue.Count, players[1].queue.Count);
+            return string.Format(@"Player 1: {0,-8}, amount of cards: {2}.
+Player 2: {1,-8}, amount of cards: {3}.", players[0].name, players[1].name, players[0].queue.Count, players[1].queue.Count);
         }
 
         public string checkWin()
@@ -37,6 +36,16 @@ namespace dotNet5779_02_6426_6580
             players[0] = new Player();
             players[1] = new Player();
             deck.distribute(players);
+
+            Console.WriteLine("Wellcome to WAR Card Game!");
+            Console.WriteLine("Enter the first player name:");
+            players[0].name = Console.ReadLine();
+
+            Console.WriteLine("Enter the second player name:");
+            players[1].name = Console.ReadLine();
+
+            Console.WriteLine();
+            Console.WriteLine(ToString());
         }
 
         public void takeAstep()
@@ -45,12 +54,18 @@ namespace dotNet5779_02_6426_6580
             {
                 players[0].queue.Enqueue(players[0].queue.Dequeue());
                 players[0].queue.Enqueue(players[1].queue.Dequeue());
+
+                Console.WriteLine(ToString());
+                Console.WriteLine();
                 return;
             }
             if (players[0].queue.Peek().CompareTo(players[1].queue.Peek()) < 0) // 1 bigger
             {
                 players[1].queue.Enqueue(players[1].queue.Dequeue());
                 players[1].queue.Enqueue(players[0].queue.Dequeue());
+
+                Console.WriteLine(ToString());
+                Console.WriteLine();
                 return;
             }
 
@@ -67,6 +82,9 @@ namespace dotNet5779_02_6426_6580
                     {
                         players[0].queue.Enqueue(list[i]);
                     }
+
+                    Console.WriteLine(ToString());
+                    Console.WriteLine();
                 }
                 else
                      if (players[0].queue.Peek().CompareTo(players[1].queue.Peek()) < 0) // 1 bigger
@@ -77,6 +95,10 @@ namespace dotNet5779_02_6426_6580
                       {
                         players[1].queue.Enqueue(list[i]);
                       }
+
+                    Console.WriteLine(ToString());
+                    Console.WriteLine();
+
                 }
                 if (isGameOver()) return;
             }

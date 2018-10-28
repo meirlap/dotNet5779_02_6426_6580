@@ -15,27 +15,10 @@ namespace dotNet5779_02_6426_6580
             Game g = new Game();
             g.startGame();
 
-            Console.WriteLine("Wellcome to WAR Card Game!");
-            Console.WriteLine("Enter the first player name");
-            g.players[0].name = Console.ReadLine();
-
-            Console.WriteLine("Enter the second player name");
-            g.players[1].name = Console.ReadLine();
-            Console.WriteLine();
-
-            foreach (Player p in g.players)
-            {
-                p.ToString();
-                Console.WriteLine();
-            }
-
             while (!g.isGameOver())
             {
-                Console.WriteLine(
-@"
-Press 1 to view the next move,
-Press 0 to run all the moves to the end:");
-
+                Console.WriteLine("\nPress 1 to view the next move,");
+                Console.WriteLine("Press 0 to run all the moves to the end:");
 
                 int choice = Int32.Parse(Console.ReadLine());
                 int step = 1;
@@ -44,8 +27,6 @@ Press 0 to run all the moves to the end:");
                     case 1:
                         Console.WriteLine(string.Format("STEP #{0}:",step));
                         g.takeAstep();
-                        Console.WriteLine(g.players[0].ToString());
-                        Console.WriteLine(g.players[1].ToString());
                         step++;
                         break;
                     case 0:
@@ -53,8 +34,6 @@ Press 0 to run all the moves to the end:");
                         {
                             Console.WriteLine(string.Format("STEP #{0}:", step));
                             g.takeAstep();
-                            Console.WriteLine(g.players[0].ToString());
-                            Console.WriteLine(g.players[1].ToString());
                             step++;
                         }                            
                         break;
